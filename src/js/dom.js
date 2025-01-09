@@ -1,4 +1,7 @@
 import { solicitar, inserir, atualizar, deletar } from './api.js';
+import { solicitarAsync, inserirAsync, atualizarAsync, deletarAsync } from './api-async.js';
+
+let useAsyncAwait = false;
 
 export function configurarEventos() {
   // Definição das variáveis dos botões
@@ -6,9 +9,24 @@ export function configurarEventos() {
   const $botaoPost = document.querySelector('#post');
   const $botaoPut = document.querySelector('#put');
   const $botaoDelete = document.querySelector('#delete');
+  const $botaoToggle = document.querySelector('#toggle');
 
-  // Get Button Interaction / Function
-  $botaoGet.addEventListener('click', solicitar);
+  $botaoToggle.addEventListener('click', () => {
+    useAsyncAwait = !useAsyncAwait;
+    $botaoToggle.innerText = useAsyncAwait
+      ? 'Usando async/await'
+      : 'Usando then/catch';
+    console.log(`Método atual: ${useAsyncAwait ? 'async/await' : 'then/catch'}`);
+  });
+
+  // Botão GET
+  $botaoGet.addEventListener('click', () => {
+    if (useAsyncAwait) {
+      solicitarAsync();
+    } else {
+      solicitar();
+    }
+  });
   $botaoGet.addEventListener('mouseover', () => {
     $botaoGet.innerText = 'GET';
   });
@@ -16,8 +34,14 @@ export function configurarEventos() {
     $botaoGet.innerText = 'Solicitar post';
   });
 
-  // Post Button Interaction / Function
-  $botaoPost.addEventListener('click', inserir);
+  // Botão POST
+  $botaoPost.addEventListener('click', () => {
+    if (useAsyncAwait) {
+      inserirAsync();
+    } else {
+      inserir();
+    }
+  });
   $botaoPost.addEventListener('mouseover', () => {
     $botaoPost.innerText = 'POST';
   });
@@ -25,8 +49,14 @@ export function configurarEventos() {
     $botaoPost.innerText = 'Inserir novo post';
   });
 
-  // Put Button Interaction / Function
-  $botaoPut.addEventListener('click', atualizar);
+  // Botão PUT
+  $botaoPut.addEventListener('click', () => {
+    if (useAsyncAwait) {
+      atualizarAsync();
+    } else {
+      atualizar();
+    }
+  });
   $botaoPut.addEventListener('mouseover', () => {
     $botaoPut.innerText = 'PUT';
   });
@@ -34,8 +64,14 @@ export function configurarEventos() {
     $botaoPut.innerText = 'Atualizar post';
   });
 
-  // Delete Button Interaction / Function
-  $botaoDelete.addEventListener('click', deletar);
+  // Botão DELETE
+  $botaoDelete.addEventListener('click', () => {
+    if (useAsyncAwait) {
+      deletarAsync();
+    } else {
+      deletar();
+    }
+  });
   $botaoDelete.addEventListener('mouseover', () => {
     $botaoDelete.innerText = 'DELETE';
   });
