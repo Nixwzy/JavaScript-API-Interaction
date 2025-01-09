@@ -1,2 +1,2 @@
-# JavaScript API Interaction
- A project that shows how an API/HTTP requests works.
+# JS API Interaction
+This repository contains a project that demonstrates how to interact with an API using JavaScript. It includes functions for making GET, POST, PUT, and DELETE requests to an API (JSONPlaceholder) for managing posts. The project also showcases event handling for buttons to trigger these API requests dynamically. The primary goal is to learn and practice API interaction techniques in JavaScript.
